@@ -3,6 +3,8 @@ import express from "express";
 import { connectdb } from "./DB/connectDb.js";
 import dotenv from "dotenv";
 import authRoutes from "./routes/auth.route.js"
+import cookieParser from "cookie-parser";
+
 
 dotenv.config()
 const app = express()
@@ -18,6 +20,6 @@ app.get("/", (req , res ) => {
 })
 
 app.use(express.json()); // allows us to parse incoming request  req.body 
- 
+ app.use(cookieParser());
 app.use("/api/auth" , authRoutes)
 
