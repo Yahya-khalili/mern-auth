@@ -93,7 +93,7 @@ export const login = async (req, res) => {
             return res.status(400).json({ success: false, message: "Invalid credentials" });
         }
 
-        console.log('Hashed password from DB:', user.password); // This will now show the correct password from DB
+        
 
         // Compare the provided password with the hashed password from the DB
         const ispassword = await bcrypt.compare(password, user.password);
@@ -150,7 +150,8 @@ export const forgotPassword = async (req , res) => {
 
         await user.save();
 
-        await sendPasswordResetEmail(user.email , `${process.env.CLIENT_URL}/${resetToken}`);
+        const resetURL = `${process.env.CLIENT_URL}/reset-password/${resetToken}`;
+        await sendPasswordResetEmail(user.email, resetURL);
         res.status(200).json({ success: true, message: "pssword reset link sent to your email " });
     } catch (error) {
         console.log("Error reset password:", error);
