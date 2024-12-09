@@ -15,6 +15,9 @@ const LoginPage = () => {
 		e.preventDefault();
 		await login(email, password);
 	};
+	const googleLogin	 = () => {
+		window.location.href = `${process.env.REACT_APP_SERVER_URL}/auth/google`;
+	  };
 
 	return (
 		<motion.div
@@ -60,8 +63,11 @@ const LoginPage = () => {
 						disabled={isLoading}
 					>
 						{isLoading ? <Loader className='w-6 h-6 animate-spin  mx-auto' /> : "Login"}
+						
 					</motion.button>
+					
 				</form>
+				
 			</div>
 			<div className='px-8 py-4 bg-gray-900 bg-opacity-50 flex justify-center'>
 				<p className='text-sm text-gray-400'>
@@ -69,6 +75,7 @@ const LoginPage = () => {
 					<Link to='/Sign-up' className='text-green-400 hover:underline'>
 						Sign up
 					</Link>
+					
 				</p>
 			</div>
 		</motion.div>
